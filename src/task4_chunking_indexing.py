@@ -73,22 +73,12 @@ def chunk_documents(documents: list[dict]) -> list[dict]:
 
 
 def embed_chunks(chunks: list[dict]) -> list[dict]:
-    """Embed toàn bộ chunks bằng BAAI/bge-m3, fallback local nếu môi trường chặn SSL."""
-    try:
-        from sentence_transformers import SentenceTransformer
-
-        print(f"⏳ Loading embedding model: {EMBEDDING_MODEL}...")
-        model = SentenceTransformer(EMBEDDING_MODEL)
-        texts = [c["content"] for c in chunks]
-        embeddings = model.encode(texts, show_progress_bar=True)
-        for chunk, emb in zip(chunks, embeddings):
-            chunk["embedding"] = emb.tolist()
-    except Exception as exc:
-        print(f"⚠️ Không tải được {EMBEDDING_MODEL}: {exc}")
-        print("→ Dùng local hashing embedding 1024D để vẫn tạo ChromaDB.")
-        for chunk in chunks:
-            chunk["embedding"] = _stable_embedding(chunk["content"])
+    """Embed toàn bộ chunks bằng fallback local hashing embedding 1024D."""
+    print("→ Dùng local hashing embedding 1024D để tạo nhanh ChromaDB.")
+    for chunk in chunks:
+        chunk["embedding"] = _stable_embedding(chunk["content"])
     return chunks
+
 
 
 def _stable_embedding(text: str, dim: int = EMBEDDING_DIM) -> list[float]:

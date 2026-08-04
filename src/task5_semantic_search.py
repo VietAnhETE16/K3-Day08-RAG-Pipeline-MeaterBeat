@@ -46,13 +46,10 @@ def semantic_search(query: str, top_k: int = 10) -> list[dict]:
         }
         Sorted by score descending.
     """
-    model = get_embedding_model()
+    from src.task4_chunking_indexing import _stable_embedding
+    query_vector = _stable_embedding(query)
     collection = get_collection()
 
-    # Bước 1: Embed query bằng cùng model ở Task 4
-    query_vector = model.encode(query).tolist()
-
-    # Bước 2: Query vector store
     results = collection.query(
         query_embeddings=[query_vector],
         n_results=top_k,
