@@ -5,50 +5,60 @@ import sys
 from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
+import urllib3
 
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Tạo thư mục lưu trữ data/landing/news/ nếu chưa tồn tại
 OUTPUT_DIR = os.path.join("data", "landing", "news")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Danh sách 5 bài viết/thông báo tuyển sinh thực tế cần thu thập
+# Danh sách các bài viết / thông báo tuyển sinh chính thức của Đại học Bách khoa Hà Nội
 URLS_TO_CRAWL = [
-    {
-        "id": "hust_2026_xettuyen_taenang",
-        "school": "Đại học Bách khoa Hà Nội",
-        "url": "https://ts.hust.edu.vn/tin-tuc/quy-che-xet-tuyen-tai-nang-2025-doi-voi-tuyen-sinh-dai-hoc-he-chinh-quy",
-        "fallback_title": "Quy chế Xét tuyển Tài năng Đại học Bách khoa Hà Nội",
-        "category": "Phương thức xét tuyển",
-    },
     {
         "id": "hust_2026_quyche_tuyensinh",
         "school": "Đại học Bách khoa Hà Nội",
         "url": "https://ts.hust.edu.vn/tin-tuc/quy-che-tuyen-sinh-dai-hoc-nam-2026",
-        "fallback_title": "Thông tin Quy chế Tuyển sinh Đại học Bách khoa Hà Nội",
+        "fallback_title": "Thông tin Quy chế Tuyển sinh Đại học Bách khoa Hà Nội năm 2026",
         "category": "Quy chế tuyển sinh",
     },
     {
-        "id": "rmit_2026_dieukien_tuyensinh",
-        "school": "Đại học RMIT Việt Nam",
-        "url": "https://www.rmit.edu.vn/vi/hoc-tap-tai-rmit/chuong-trinh-cu-nhan",
-        "fallback_title": "Yêu cầu đầu vào và Điều kiện xét tuyển Đại học RMIT",
-        "category": "Điều kiện đầu vào",
+        "id": "hust_2026_xettuyen_taenang",
+        "school": "Đại học Bách khoa Hà Nội",
+        "url": "https://ts.hust.edu.vn/tin-tuc/quy-che-xet-tuyen-tai-nang-2025-doi-voi-tuyen-sinh-dai-hoc-he-chinh-quy",
+        "fallback_title": "Quy định về Phương thức Xét tuyển tài năng (XTTN) Đại học Bách khoa Hà Nội",
+        "category": "Phương thức xét tuyển",
     },
     {
-        "id": "vinuni_2026_hocphi_scholes",
-        "school": "Trường Đại học VinUni",
-        "url": "https://vinuni.edu.vn/scholarship/",
-        "fallback_title": "Chính sách Học phí và Học bổng Trường Đại học VinUni",
-        "category": "Học phí & Học bổng",
+        "id": "hust_2026_danhgia_tuduy_tsa",
+        "school": "Đại học Bách khoa Hà Nội",
+        "url": "https://ts.hust.edu.vn/tin-tuc/de-an-to-chuc-ky-thi-danh-gia-tu-duy-nam-2023",
+        "fallback_title": "Đề án tổ chức Kỳ thi Đánh giá tư duy (TSA) Đại học Bách khoa Hà Nội",
+        "category": "Kỳ thi Đánh giá tư duy",
     },
     {
-        "id": "khtn_2026_xettuyen_thang",
-        "school": "Đại học Khoa học Tự nhiên - ĐHQGHN",
-        "url": "https://hus.vnu.edu.vn/dao-tao/dai-hoc/thong-tin-tuyen-sinh.html",
-        "fallback_title": "Thông tin Tuyển sinh Đại học Khoa học Tự nhiên",
-        "category": "Đề án tuyển sinh",
+        "id": "hust_2026_quydoi_ngoai_ngu",
+        "school": "Đại học Bách khoa Hà Nội",
+        "url": "https://ts.hust.edu.vn/tin-tuc/huong-dan-quy-doi-diem-chung-chi-ngoai-ngu-nam-2022",
+        "fallback_title": "Hướng dẫn Quy đổi điểm chứng chỉ ngoại ngữ (IELTS/TOEFL) Đại học Bách khoa Hà Nội",
+        "category": "Chứng chỉ ngoại ngữ",
+    },
+    {
+        "id": "hust_2026_diemchuan_caccnam",
+        "school": "Đại học Bách khoa Hà Nội",
+        "url": "https://ts.hust.edu.vn/tin-tuc/diem-chuan-trung-tuyen-dai-hoc-he-chinh-quy-nam-2023",
+        "fallback_title": "Bảng Điểm chuẩn trúng tuyển Đại học hệ chính quy Đại học Bách khoa Hà Nội",
+        "category": "Điểm chuẩn các năm",
+    },
+    {
+        "id": "hust_2026_xacnhan_nhaphoc",
+        "school": "Đại học Bách khoa Hà Nội",
+        "url": "https://ts.hust.edu.vn/tin-tuc/huong-dan-thu-tuc-xac-nhan-nhap-hoc-doi-voi-thi-sinh-trung-tuyen-theo-hinh-thuc-xet-diem-thi-tot-nghiep-thpt",
+        "fallback_title": "Hướng dẫn thủ tục Xác nhận nhập học Đại học Bách khoa Hà Nội",
+        "category": "Hướng dẫn nhập học",
     },
 ]
 
@@ -59,18 +69,14 @@ def clean_text(text: str) -> str:
     return text.strip()
 
 
-import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
 def crawl_article(item: dict) -> dict:
-    """Crawl chi tiết bài viết, trích xuất Title và Body Text."""
+    """Crawl chi tiết bài viết, trích xuất Title và Body Text đầy đủ nhất."""
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
 
     try:
         response = requests.get(item["url"], headers=headers, timeout=10, verify=False)
-
         response.encoding = "utf-8"
 
         if response.status_code == 200:
@@ -84,15 +90,18 @@ def crawl_article(item: dict) -> dict:
                 else item["fallback_title"]
             )
 
-            # Lấy nội dung văn bản (bỏ các thẻ script, style, nav, footer)
+            # Lấy nội dung văn bản (bỏ các thẻ script, style, nav, footer, header)
             for tag in soup(["script", "style", "nav", "footer", "header"]):
                 tag.decompose()
 
-            paragraphs = soup.find_all(["p", "li", "h3", "h4", "table"])
-            content_list = [clean_text(p.get_text()) for p in paragraphs]
-            body_content = "\n\n".join(
-                [text for text in content_list if len(text) > 30]
-            )
+            paragraphs = soup.find_all(["p", "li", "h3", "h4", "table", "tr"])
+            content_list = []
+            for p in paragraphs:
+                txt = clean_text(p.get_text())
+                if len(txt) > 20 and txt not in content_list:
+                    content_list.append(txt)
+
+            body_content = "\n\n".join(content_list)
 
             return {
                 "id": item["id"],
@@ -102,14 +111,11 @@ def crawl_article(item: dict) -> dict:
                 "source_url": item["url"],
                 "crawled_at": datetime.now().isoformat(),
                 "status": "success",
-                "content": body_content[
-                    :4000
-                ],  # Giới hạn độ dài bản trích yếu
+                "content": body_content,
             }
     except Exception as e:
         print(f"⚠️ Lỗi khi cào {item['url']}: {e}")
 
-    # Tạo dữ liệu mock-up chuẩn nếu không kết nối được tới server trường
     return {
         "id": item["id"],
         "school_name": item["school"],
@@ -118,12 +124,12 @@ def crawl_article(item: dict) -> dict:
         "source_url": item["url"],
         "crawled_at": datetime.now().isoformat(),
         "status": "fallback",
-        "content": f"Nội dung quy định tuyển sinh chính thức thuộc {item['school']}. Bao gồm các điều kiện chi tiết về điểm GPA, chứng chỉ tiếng Anh quốc tế (IELTS), kết quả thi Đánh giá tư duy/năng lực và danh mục các ngành tuyển sinh...",
+        "content": f"Nội dung thông báo chính thức thuộc {item['school']}. Chi tiết tra cứu tại {item['url']}.",
     }
 
 
 def main():
-    print("🚀 Bắt đầu crawl dữ liệu đề án tuyển sinh...")
+    print("🚀 Bắt đầu crawl toàn bộ bài viết/thông báo tuyển sinh ĐẠI HỌC BÁCH KHOA HÀ NỘI...")
 
     for item in URLS_TO_CRAWL:
         data = crawl_article(item)
@@ -134,10 +140,10 @@ def main():
             json.dump(data, f, ensure_ascii=False, indent=2)
 
         print(
-            f"✅ Đã lưu: {filepath} ({data['school_name']} - {data['category']})"
+            f"✅ Đã lưu: {filepath} ({data['school_name']} - {data['category']} - {len(data['content'])} chars)"
         )
 
-    print("\n🎉 HOÀN THÀNH! Đã lưu 5 bài viết vào thư mục data/landing/news/")
+    print(f"\n🎉 HOÀN THÀNH! Đã lưu {len(URLS_TO_CRAWL)} bài viết vào thư mục data/landing/news/")
 
 
 if __name__ == "__main__":

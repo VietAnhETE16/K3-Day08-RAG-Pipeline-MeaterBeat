@@ -28,7 +28,6 @@ OUTPUT_DIR = Path(__file__).parent.parent / "data" / "standardized"
 
 
 def convert_legal_docs():
-
     """Convert PDF/DOCX files trong data/landing/legal/ sang markdown."""
     legal_dir = LANDING_DIR / "legal"
     output_dir = OUTPUT_DIR / "legal"
@@ -43,22 +42,91 @@ def convert_legal_docs():
         print("No legal PDF/DOCX files found in data/landing/legal/.")
         return
 
+    md_engine = None
     try:
         from markitdown import MarkItDown
-        md = MarkItDown()
+        md_engine = MarkItDown()
     except ImportError:
-        print("⚠️ MarkItDown chưa sẵn sàng, đang cài đặt...")
-        return
+        pass
 
     for filepath in legal_files:
         print(f"Converting: {filepath.name}")
-        try:
-            result = md.convert(str(filepath))
-            output_path = output_dir / f"{filepath.stem}.md"
-            output_path.write_text(result.text_content, encoding="utf-8")
-            print(f"  ✓ Saved: {output_path}")
-        except Exception as e:
-            print(f"  ❌ Error converting {filepath.name}: {e}")
+        output_path = output_dir / f"{filepath.stem}.md"
+        converted = False
+
+        # Attempt 1: PyMuPDF (fitz)
+        if not converted:
+            try:
+                import fitz
+
+                doc = fitz.open(filepath)
+                full_text = []
+                for i, page in enumerate(doc, 1):
+                    txt = page.get_text()
+                    if txt and txt.strip():
+                        full_text.append(f"## Page {i}\n\n{txt.strip()}")
+                if full_text:
+                    content = (
+                        f"# {filepath.stem}\n\n" + "\n\n---\n\n".join(full_text)
+                    )
+                    output_path.write_text(content, encoding="utf-8")
+                    print(f"  ✓ Saved (via PyMuPDF): {output_path}")
+                    converted = True
+            except Exception as e:
+                pass
+
+        # Attempt 2: MarkItDown
+        if not converted and md_engine is not None:
+            try:
+                result = md_engine.convert(str(filepath))
+                output_path.write_text(result.text_content, encoding="utf-8")
+                print(f"  ✓ Saved (via MarkItDown): {output_path}")
+                converted = True
+            except Exception as e:
+                print(f"  ⚠️ MarkItDown failed for {filepath.name}: {e}")
+
+        # Attempt 3: pdfplumber
+        if not converted:
+            try:
+                import pdfplumber
+                full_text = []
+                with pdfplumber.open(filepath) as pdf:
+                    for i, page in enumerate(pdf.pages, 1):
+                        txt = page.extract_text()
+                        if txt:
+                            full_text.append(f"## Page {i}\n\n{txt}")
+                if full_text:
+                    content = f"# {filepath.stem}\n\n" + "\n\n---\n\n".join(full_text)
+                    output_path.write_text(content, encoding="utf-8")
+                    print(f"  ✓ Saved (via pdfplumber): {output_path}")
+                    converted = True
+            except Exception as e:
+                pass
+
+        # Attempt 4: pypdf
+        if not converted:
+            try:
+                from pypdf import PdfReader
+                reader = PdfReader(filepath)
+                full_text = []
+                for i, page in enumerate(reader.pages, 1):
+                    txt = page.extract_text()
+                    if txt:
+                        full_text.append(f"## Page {i}\n\n{txt}")
+                if full_text:
+                    content = f"# {filepath.stem}\n\n" + "\n\n---\n\n".join(full_text)
+                    output_path.write_text(content, encoding="utf-8")
+                    print(f"  ✓ Saved (via pypdf): {output_path}")
+                    converted = True
+            except Exception as e:
+                pass
+
+        if not converted:
+            print(f"  ❌ Skipping {filepath.name} - no suitable PDF converter available.")
+
+
+
+
 
 
 
