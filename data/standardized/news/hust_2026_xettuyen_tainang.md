@@ -1,0 +1,92 @@
+# Quy chế xét tuyển tài năng 2025 đối với tuyển sinh Đại học hệ chính quy
+
+**Truong:** Đại học Bách khoa Hà Nội
+**DanhMuc:** Phương thức xét tuyển
+**Source:** https://ts.hust.edu.vn/tin-tuc/quy-che-xet-tuyen-tai-nang-2025-doi-voi-tuyen-sinh-dai-hoc-he-chinh-quy
+**Crawled:** 2026-08-04T10:09:44.654563
+
+---
+
+Tuyển sinh Đại học Thông tin chung Đề án tuyển sinh Xét tuyển tài năng Kỳ thi đánh giá tư duy Điểm chuẩn tuyển sinh Xác thực chứng chỉ ngoại ngữ Hướng nghiệp
+
+Tuyển sinh sau đại học Tuyển sinh cao học Tuyển sinh NCS Tuyển sinh Kỹ sư chuyên sâu
+
+Tin tức - Sự kiện Tin tức Đại học Tin tức Sau đại học Thành tích Thông báo Sự kiện Người Bách Khoa Cảm nhận Cựu sinh viên
+
+Học phí - Học bổng Học phí Học bổng
+
+Giới thiệu về Kỳ thi Đánh giá tư duy - TSA 607981
+
+Giới thiệu về Kỳ thi Đánh giá tư duy - TSA 607981
+
+Điểm chuẩn Đại học Bách khoa Hà Nội 2024: Điểm thi ĐGTD cao nhất 83.82; điểm thi tốt nghiệp THPT cao nhất 28.53 537101
+
+Điểm chuẩn Đại học Bách khoa Hà Nội 2024: Điểm thi ĐGTD cao nhất 83.82; điểm thi tốt nghiệp THPT cao nhất 28.53 537101
+
+Thông tin Tuyển sinh Đại học chính quy năm 2026 328332
+
+Thông tin Tuyển sinh Đại học chính quy năm 2026 328332
+
+Điểm chuẩn trúng tuyển đại học hệ chính quy năm 2023 283122
+
+Điểm chuẩn trúng tuyển đại học hệ chính quy năm 2023 283122
+
+Bản đồ trường Đại học Bách Khoa Hà Nội 263655
+
+Bản đồ trường Đại học Bách Khoa Hà Nội 263655
+
+Quy định về phương thức xét tuyển tài năng đối với tuyển sinh Đại học hệ chính quy áp dụng từ năm 2025
+
+Hướng dẫn đăng ký XTTN 2025 - Bước 2: Xét tuyển tài năng
+
+Bài thi đặc biệt của ĐHBK Hà Nộic
+
+Thông báo tuyển sinh trình độ Thạc sĩ Đợt 1 năm 2021
+
+ĐHBK Hà Nội công bố Phương án tuyển sinh Đại học chính quy năm 2025
+
+Gần 3000 giáo viên Hải Dương tham gia tập huấn trực tuyến về Kỳ thi Đánh giá tư duy TSA
+
+Hoạt động tư vấn hướng nghiệp cho Học sinh THPT Giao Thủy B, Nam Định ngày 1.12.2019
+
+Văn phòng: C2-201, C1 - 103, 104, 105
+
+Văn phòng C1 - 201 - Quản lý điểm và xử lý học tập, Đồ án TN, Xét TN
+
+Ban Tuyển sinh-Hướng nghiệp - Phòng 101, Tòa nhà C1B
+
+Phone: (+84) 243 868 3408 - 084 868 3408
+
+Phòng M321, Nhà C7, Đại học Bách khoa Hà Nội
+
+Khoa Ngoại ngữ, Phòng M312, Nhà C7, Đại học Bách khoa Hà Nội, Số 1, Đường Đại Cồ Việt, P. Bạch Mai, Hà Nội
+
+Phòng 101 nhà C9, ĐHBK Hà Nội, Số 01 Đại Cồ Việt - phường Bạch Mai - Hà Nội
+
+Phone: 0243869 2137 & 024 3868 2470
+
+P. 116, Nhà C10, ĐH Bách khoa Hà Nội (Số 1, Đại Cồ Việt, Q.Hai Bà Trưng, Hà Nội)
+
+VP C7-614M, ĐH Bách khoa Hà Nội, số 1 Đại Cồ Việt, Hà Nội
+
+Văn phòng Trường CNTT&TT (P505 - Nhà B1)
+
+Phòng 309, Tòa nhà C3, ĐHBK Hà Nội - Số 1, Đại Cồ Việt, Phường Bạch Mai, Hà Nội
+
+P403-404, Nhà C9, Đại học Bách Khoa Hà Nội; Số 1 Đại Cồ Việt, Q. Hai Bà Trưng, Tp. Hà Nội
+
+Phone: 024 3869 2304 / 3868.0791 / (CT TROY: 093 898 3868)
+
+Tầng 7 - nhà D8, Số 1 Đại Cồ Việt, Q.Hai Bà Trưng, Hà Nội
+
+Đăng ký thi thử bài thi tư duy 2023
+
+Hướng nghiệp Đăng ký trải nghiệm khối THPT
+
+Tuyển sinh Đại học Thông tin chung Brochure Thông tin tuyển sinh Chương trình đào tạo đại học Xét tuyển tài năng Kỳ thi đánh giá tư duy Xác thực chứng chỉ Ngoại ngữ Điểm chuẩn các năm
+
+Tuyển sinh Sau đại học Tuyển sinh Kỹ sư chuyên sâu Tuyển sinh cao học Tuyển sinh nghiên cứu sinh
+
+Học phí - Học bổng Học phí Học bổng
+
+Liên hệ Ban TS-HN Đơn vị đào tạo
