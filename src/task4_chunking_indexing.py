@@ -1,34 +1,31 @@
 """
-Task 4 — Chunking & Indexing vào Vector Store.
+Task 4 — Chunking & Indexing vào Vector Store (ChromaDB) & JSON Export cho BM25.
 """
 
+import json
 from pathlib import Path
 import sys
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-STANDARDIZED_DIR = Path(__file__).parent.parent / "data" / "standardized"
-CHROMA_DIR = Path(__file__).parent.parent / "chroma_db"
+# Khai báo đường dẫn thư mục
+BASE_DIR = Path(__file__).parent.parent
+STANDARDIZED_DIR = BASE_DIR / "data" / "standardized"
+PROCESSED_DATA_DIR = BASE_DIR / "data"
+CHROMA_DIR = BASE_DIR / "chroma_db"
+PROCESSED_CHUNKS_FILE = PROCESSED_DATA_DIR / "processed_chunks.json"
 
 # =============================================================================
 # CONFIGURATION — Chunking & Embedding Parameters
 # =============================================================================
-
-# Chunking configuration: CHUNK_SIZE=800 và CHUNK_OVERLAP=100
-# - CHUNK_SIZE=800: Lưu giữ trọn vẹn ngữ cảnh của từng điều khoản quy chế & điểm chuẩn.
-# - CHUNK_OVERLAP=100: Giữ liên kết mượt mà giữa các đoạn văn bản liền kề.
 CHUNK_SIZE = 800
 CHUNK_OVERLAP = 100
-CHUNKING_METHOD = "recursive"  # "recursive" | "markdown_header" | "semantic"
+CHUNKING_METHOD = "recursive"
 
-# Embedding Model configuration: BAAI/bge-m3
-# - BAAI/bge-m3 là mô hình embedding đa ngôn ngữ mạnh mẽ (multilingual), 1024 chiều.
-# - Tối ưu vượt trội cho tiếng Việt, tra cứu chính xác quy chế và điểm chuẩn tuyển sinh.
 EMBEDDING_MODEL = "BAAI/bge-m3"
 EMBEDDING_DIM = 1024
 
-# Vector Store configuration
 VECTOR_STORE = "chromadb"
 COLLECTION_NAME = "university_services_docs"
 
@@ -78,7 +75,7 @@ def embed_chunks(chunks: list[dict]) -> list[dict]:
     """Embed toàn bộ chunks bằng BAAI/bge-m3."""
     from sentence_transformers import SentenceTransformer
 
-    print(f"Loading embedding model: {EMBEDDING_MODEL}...")
+    print(f"⏳ Loading embedding model: {EMBEDDING_MODEL}...")
     model = SentenceTransformer(EMBEDDING_MODEL)
     texts = [c["content"] for c in chunks]
     embeddings = model.encode(texts, show_progress_bar=True)
@@ -107,8 +104,23 @@ def index_to_vectorstore(chunks: list[dict]):
     )
 
 
+def save_chunks_to_json(chunks: list[dict]):
+    """Lưu danh sách chunks ra file JSON để phục vụ cho Task 6 (BM25 Search)."""
+    PROCESSED_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    
+    # Loại bỏ vector embedding trước khi lưu file JSON để tiết kiệm dung lượng
+    clean_chunks = [
+        {"content": c["content"], "metadata": c["metadata"]} 
+        for c in chunks
+    ]
+    
+    with open(PROCESSED_CHUNKS_FILE, "w", encoding="utf-8") as f:
+        json.dump(clean_chunks, f, ensure_ascii=False, indent=2)
+    print(f"✓ Saved chunks to {PROCESSED_CHUNKS_FILE} (for BM25)")
+
+
 def run_pipeline():
-    """Chạy toàn bộ pipeline: load → chunk → embed → index."""
+    """Chạy toàn bộ pipeline Task 4: load → chunk → embed → index → save JSON."""
     print("=" * 50)
     print("Task 4: Chunking & Indexing")
     print(f"  Chunking: {CHUNKING_METHOD} (size={CHUNK_SIZE}, overlap={CHUNK_OVERLAP})")
@@ -117,16 +129,24 @@ def run_pipeline():
     print("=" * 50)
 
     docs = load_documents()
+    if not docs:
+        print("❌ Không tìm thấy văn bản nào trong data/standardized/!")
+        return
+
     print(f"\n✓ Loaded {len(docs)} documents")
 
     chunks = chunk_documents(docs)
     print(f"✓ Created {len(chunks)} chunks")
 
+    # Lưu file JSON cho BM25 (Task 6)
+    save_chunks_to_json(chunks)
+
+    # Embed và lưu vào ChromaDB cho Semantic Search (Task 5)
     chunks = embed_chunks(chunks)
     print(f"✓ Embedded {len(chunks)} chunks")
 
     index_to_vectorstore(chunks)
-    print("✓ Indexed to vector store")
+    print("✓ Indexed to ChromaDB vector store successfully!")
 
 
 if __name__ == "__main__":
