@@ -530,7 +530,7 @@ else:
         st.session_state.messages.append({"role": "user", "content": query})
 
         with st.spinner("🤖 Đang xử lý câu hỏi..."):
-            res = execute_rag(query, top_k, is_advanced=is_adv)
+            res = execute_rag(query, top_k_adv, is_advanced=is_adv)
 
         st.session_state.messages.append({
             "role": "assistant",
