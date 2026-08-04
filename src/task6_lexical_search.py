@@ -25,19 +25,16 @@ _BM25_INDEX = None
 
 
 def _load_corpus() -> list[dict]:
-    """Load all markdown documents from data/standardized into corpus."""
-    corpus = []
-    if not STANDARDIZED_DIR.exists():
-        return corpus
+    """Load and chunk all markdown documents from data/standardized into corpus."""
+    from src.task4_chunking_indexing import load_documents, chunk_documents
+    try:
+        docs = load_documents()
+        chunks = chunk_documents(docs)
+        return chunks
+    except Exception as e:
+        print(f"⚠️ Lỗi khi load/chunk cho BM25: {e}")
+        return []
 
-    for md_file in STANDARDIZED_DIR.rglob("*.md"):
-        text = md_file.read_text(encoding="utf-8")
-        doc_type = "legal" if "legal" in md_file.parts else "news"
-        corpus.append({
-            "content": text,
-            "metadata": {"source": md_file.name, "type": doc_type},
-        })
-    return corpus
 
 
 def _tokenize(text: str) -> list[str]:
