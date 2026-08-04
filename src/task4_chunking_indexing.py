@@ -2,6 +2,7 @@
 Task 4 — Chunking & Indexing vào Vector Store (ChromaDB) & JSON Export cho BM25.
 """
 
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -72,16 +73,33 @@ def chunk_documents(documents: list[dict]) -> list[dict]:
 
 
 def embed_chunks(chunks: list[dict]) -> list[dict]:
-    """Embed toàn bộ chunks bằng BAAI/bge-m3."""
-    from sentence_transformers import SentenceTransformer
+    """Embed toàn bộ chunks bằng BAAI/bge-m3, fallback local nếu môi trường chặn SSL."""
+    try:
+        from sentence_transformers import SentenceTransformer
 
-    print(f"⏳ Loading embedding model: {EMBEDDING_MODEL}...")
-    model = SentenceTransformer(EMBEDDING_MODEL)
-    texts = [c["content"] for c in chunks]
-    embeddings = model.encode(texts, show_progress_bar=True)
-    for chunk, emb in zip(chunks, embeddings):
-        chunk["embedding"] = emb.tolist()
+        print(f"⏳ Loading embedding model: {EMBEDDING_MODEL}...")
+        model = SentenceTransformer(EMBEDDING_MODEL)
+        texts = [c["content"] for c in chunks]
+        embeddings = model.encode(texts, show_progress_bar=True)
+        for chunk, emb in zip(chunks, embeddings):
+            chunk["embedding"] = emb.tolist()
+    except Exception as exc:
+        print(f"⚠️ Không tải được {EMBEDDING_MODEL}: {exc}")
+        print("→ Dùng local hashing embedding 1024D để vẫn tạo ChromaDB.")
+        for chunk in chunks:
+            chunk["embedding"] = _stable_embedding(chunk["content"])
     return chunks
+
+
+def _stable_embedding(text: str, dim: int = EMBEDDING_DIM) -> list[float]:
+    """Vector 1024D ổn định, chạy offline khi SentenceTransformer bị chặn."""
+    vector = [0.0] * dim
+    for token in text.lower().replace("/", " ").replace("-", " ").split():
+        digest = hashlib.md5(token.encode("utf-8")).hexdigest()
+        index = int(digest[:8], 16) % dim
+        vector[index] += 1.0
+    norm = sum(value * value for value in vector) ** 0.5 or 1.0
+    return [value / norm for value in vector]
 
 
 def index_to_vectorstore(chunks: list[dict]):
