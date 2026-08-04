@@ -11,9 +11,20 @@ pinned: false
 
 # Ngày 8 — RAG Pipeline v2
 
-**Chương 2 | Ngày 8 trong 15**
+## 👥 Danh Sách Thành Viên Nhóm
+
+| Họ và Tên | MSSV | Dự Án (Project) | Vai Trò (Role) |
+| :--- | :--- | :--- | :--- |
+| **Mai Việt Anh** | 2A202601083 | Trợ Lý Tra Cứu Điểm Chuẩn & Đề Án Tuyển Sinh Đại Học | **Role 1 (Team Leader & RAG Architect)** |
+| **Diêm Công Thành** | 2A202601689 | Trợ Lý Tra Cứu Điểm Chuẩn & Đề Án Tuyển Sinh Đại Học | **Role 2 (Data Engineering & Scraping Dev)** |
+| **Phùng Văn Đạt** | 2A202602012 | Trợ Lý Tra Cứu Điểm Chuẩn & Đề Án Tuyển Sinh Đại Học | **Role 3 (Vector Database & Dense Search Dev)** |
+| **Nguyễn Trọng Dũng** | 2A202601965 | Trợ Lý Tra Cứu Điểm Chuẩn & Đề Án Tuyển Sinh Đại Học | **Role 4 (Sparse Retrieval & Fallback Dev)** |
+| **Trần Tuấn Trung** | 2A202601769 | Trợ Lý Tra Cứu Điểm Chuẩn & Đề Án Tuyển Sinh Đại Học | **Role 5 (Evaluation & Benchmark QA Dev)** |
+
+**Chương 2 \| Ngày 8 trong 15**
 
 > Dùng chung chủ đề "University Services" với biến thể K3 của Ngày 7 (`K3_VARIANT.md`), để pipeline Ngày 7 → Ngày 8 nhất quán.
+
 
 ---
 
