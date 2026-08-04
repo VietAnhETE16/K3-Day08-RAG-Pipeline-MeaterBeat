@@ -1,17 +1,77 @@
 [
   {
-    "question": "Học phí hàng năm của chương trình Business tại RMIT Vietnam là bao nhiêu?",
-    "expected_answer": "Khoảng 375.840.000 VND mỗi năm (tùy chương trình cụ thể).",
-    "expected_context": "Trang Tuition Fees, mục Undergraduate Programs"
+    "question": "Đại học Bách Khoa Hà Nội dự kiến tuyển sinh bao nhiêu sinh viên hệ chính quy năm 2026?",
+    "expected_answer": "Đại học Bách Khoa Hà Nội dự kiến tuyển 9.880 sinh viên đại học chính quy năm 2026.",
+    "expected_context": "thong-tin-tuyen-sinh-dai-hoc-bach-khoa-ha-noi-2026.md, mục Thông tin chung"
   },
   {
-    "question": "Học phí được thanh toán theo hình thức nào?",
-    "expected_answer": "Thanh toán theo từng học kỳ, tính theo từng môn học đã đăng ký.",
-    "expected_context": "Trang Tuition Fees, mục Payment Structure"
+    "question": "Ba phương thức tuyển sinh chính của Bách Khoa Hà Nội năm 2026 là gì?",
+    "expected_answer": "Ba phương thức tuyển sinh gồm Xét tuyển tài năng (XTTN), Xét tuyển theo điểm thi Đánh giá tư duy (ĐGTD) và Xét tuyển theo điểm thi tốt nghiệp THPT (THPT).",
+    "expected_context": "thong-tin-tuyen-sinh-dai-hoc-bach-khoa-ha-noi-2026.md, mục Các phương thức tuyển sinh"
   },
   {
-    "question": "Trường có cung cấp ký túc xá trong khuôn viên không?",
-    "expected_answer": "Không — trường không cung cấp chỗ ở trong khuôn viên, nhưng có đội ngũ hỗ trợ sinh viên tìm chỗ ở gần trường.",
-    "expected_context": "Trang Accommodation Services"
+    "question": "Xét tuyển tài năng tại Bách Khoa Hà Nội bao gồm những hình thức nào?",
+    "expected_answer": "Xét tuyển tài năng gồm xét tuyển thẳng thí sinh đạt thành tích cao, xét tuyển dựa trên chứng chỉ quốc tế SAT/ACT/A-Level/AP/IB, và xét tuyển theo hồ sơ năng lực kết hợp phỏng vấn.",
+    "expected_context": "qd-dhbk_xttn_2025.md, mục Phương thức Xét tuyển tài năng"
+  },
+  {
+    "question": "Bách Khoa Hà Nội có xét tuyển thẳng thí sinh đạt giải học sinh giỏi quốc gia không?",
+    "expected_answer": "Có, Bách Khoa Hà Nội xét tuyển thẳng thí sinh đạt giải cao trong kỳ thi chọn học sinh giỏi quốc gia vào chương trình đào tạo phù hợp.",
+    "expected_context": "qd-dhbk_xttn_2025.md, Điều 2 Xét tuyển thẳng theo quy định của Bộ GD&ĐT"
+  },
+  {
+    "question": "RMIT Việt Nam yêu cầu học phí được thanh toán theo hình thức nào?",
+    "expected_answer": "RMIT Việt Nam yêu cầu học phí được thanh toán theo từng học kỳ, dựa trên số môn sinh viên đăng ký trong học kỳ đó.",
+    "expected_context": "rmit_2026_dieukien_tuyensinh.md, mục Học phí"
+  },
+  {
+    "question": "RMIT có khuyến khích thí sinh tìm hiểu thông tin gì liên quan đến học bổng?",
+    "expected_answer": "RMIT khuyến khích thí sinh tìm hiểu chương trình học bổng dành cho sinh viên tương lai và nộp hồ sơ nếu đủ điều kiện.",
+    "expected_context": "rmit_2026_dieukien_tuyensinh.md, mục Học bổng"
+  },
+  {
+    "question": "Bách Khoa Hà Nội dùng kết quả thi Đánh giá tư duy trong tuyển sinh 2026 không?",
+    "expected_answer": "Có, một trong ba phương thức tuyển sinh năm 2026 là xét tuyển theo điểm thi Đánh giá tư duy (ĐGTD).",
+    "expected_context": "thong-tin-tuyen-sinh-dai-hoc-bach-khoa-ha-noi-2026.md, mục Các phương thức tuyển sinh"
+  },
+  {
+    "question": "Bách Khoa Hà Nội có sử dụng kết quả tốt nghiệp THPT để xét tuyển năm 2026 không?",
+    "expected_answer": "Có, Bách Khoa Hà Nội vẫn sử dụng phương thức xét tuyển theo điểm thi tốt nghiệp THPT (THPT).",
+    "expected_context": "thong-tin-tuyen-sinh-dai-hoc-bach-khoa-ha-noi-2026.md, mục Các phương thức tuyển sinh"
+  },
+  {
+    "question": "Bách Khoa Hà Nội cho phép thí sinh sử dụng chứng chỉ ngoại ngữ để quy đổi điểm tiếng Anh khi xét tuyển không?",
+    "expected_answer": "Có, thí sinh có chứng chỉ ngoại ngữ như VSTEP, IELTS, hoặc chứng chỉ quốc tế tương đương có thể quy đổi thành điểm tiếng Anh khi xét tuyển.",
+    "expected_context": "thong-tin-tuyen-sinh-dai-hoc-bach-khoa-ha-noi-2026.md, mục Quy định về ngoại ngữ"
+  },
+  {
+    "question": "RMIT Việt Nam có cam kết gì về môi trường học tập và cơ hội nghề nghiệp?",
+    "expected_answer": "RMIT nhấn mạnh môi trường học tập quốc tế, sự kết hợp giữa lý thuyết và thực tiễn, cùng cơ hội nghề nghiệp và hỗ trợ sinh viên tìm việc sau tốt nghiệp.",
+    "expected_context": "rmit_2026_dieukien_tuyensinh.md, phần giới thiệu về RMIT Việt Nam và cơ hội nghề nghiệp"
+  },
+  {
+    "question": "Bách Khoa Hà Nội có tuyển thẳng thí sinh đạt giải KHKT quốc gia hoặc quốc tế không?",
+    "expected_answer": "Có, thí sinh đạt giải KHKT cấp quốc gia hoặc quốc tế được xét tuyển thẳng vào các chương trình phù hợp với lĩnh vực đề tài.",
+    "expected_context": "qd-dhbk_xttn_2025.md, mục Xét tuyển theo hồ sơ năng lực và thành tích KHKT"
+  },
+  {
+    "question": "Đại học Khoa học Tự nhiên - ĐHQGHN có đề án tuyển sinh bậc đại học và sau đại học không?",
+    "expected_answer": "Có, Khoa học Tự nhiên - ĐHQGHN có đề án tuyển sinh cả bậc đại học và sau đại học với nhiều ngành đào tạo.",
+    "expected_context": "khtn_2026_xettuyen_thang.md, phần giới thiệu đề án tuyển sinh"
+  },
+  {
+    "question": "Đại học Bách Khoa Hà Nội có quy định xét tuyển thẳng theo chứng chỉ quốc tế SAT, ACT, A-Level, AP và IB không?",
+    "expected_answer": "Có, Bách Khoa Hà Nội đưa ra xét tuyển dựa trên chứng chỉ quốc tế gồm SAT, ACT, A-Level, AP và IB.",
+    "expected_context": "qd-dhbk_xttn_2025.md, mục Xét tuyển dựa trên chứng chỉ quốc tế"
+  },
+  {
+    "question": "RMIT Việt Nam có đề cập đến bằng cấp được cấp bởi RMIT Melbourne không?",
+    "expected_answer": "Có, RMIT Việt Nam ghi rằng sinh viên tốt nghiệp được cấp bằng bởi Đại học RMIT Melbourne.",
+    "expected_context": "rmit_2026_dieukien_tuyensinh.md, phần mô tả chương trình quốc tế và bằng cấp"
+  },
+  {
+    "question": "Bách Khoa Hà Nội có dự kiến tuyển sinh bao nhiêu chương trình Việt - Pháp và quốc tế trong đề án 2026?",
+    "expected_answer": "Bách Khoa Hà Nội dự kiến có 2 chương trình Việt - Pháp và 2 chương trình liên kết đào tạo quốc tế trong năm 2026.",
+    "expected_context": "thong-tin-tuyen-sinh-dai-hoc-bach-khoa-ha-noi-2026.md, mục Danh mục chương trình tuyển sinh"
   }
 ]
